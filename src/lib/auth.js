@@ -2,23 +2,14 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma.js";
 
-// If your Prisma file is located elsewhere, you can change the path
-
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
-    provider: "postgresql", // or "mysql", "postgresql", ...etc
+    provider: "postgresql",
   }),
   trustedOrigins: [
-    "http://localhost:3000", // If you have other clients
+    "http://localhost:3000",
     "https://tts-todos-nextjs.vercel.app",
   ],
-
-  // Add this to ensure CORS is handled properly
-  advanced: {
-    crossSubDomainCookies: {
-      enabled: true,
-    },
-  },
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
@@ -43,8 +34,8 @@ export const auth = betterAuth({
       },
     },
   },
-  trustHost: true, // Add this for proper URL generation
+  trustHost: true,
   logger: {
-    level: "debug", // Change from "error" to "debug" for more detailed logging
+    level: "debug",
   },
 });
