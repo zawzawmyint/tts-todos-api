@@ -26,12 +26,12 @@ export const auth = betterAuth({
       maxAge: 5 * 60, // 5 minutes
     },
   },
-  cookie: {
-    sameSite: "none", // Changed from "lax" to "none"
-    secure: true,
-    httpOnly: true,
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7,
+  advanced: {
+    cookieOptions: {
+      sameSite: "none",
+      secure: true,
+      httpOnly: true,
+    },
   },
   // cookies: {
   //   sessionToken: {
