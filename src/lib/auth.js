@@ -26,6 +26,14 @@ export const auth = betterAuth({
       maxAge: 5 * 60, // 5 minutes
     },
   },
+  // Try this exact structure
+  baseURL: "https://tts-todos-api.onrender.com",
+  basePath: "/api/auth",
+
+  // Cookie settings at root level
+  secureCookies: true,
+  cookiePrefix: "better-auth",
+
   advanced: {
     cookieOptions: {
       sameSite: "none",
