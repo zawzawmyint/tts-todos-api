@@ -26,18 +26,25 @@ export const auth = betterAuth({
       maxAge: 5 * 60, // 5 minutes
     },
   },
-  cookies: {
-    sessionToken: {
-      name: "better-auth.session_token",
-      options: {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        path: "/",
-        maxAge: 60 * 60 * 24 * 7, // 7 days
-      },
-    },
+  cookie: {
+    sameSite: "none", // Changed from "lax" to "none"
+    secure: true,
+    httpOnly: true,
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,
   },
+  // cookies: {
+  //   sessionToken: {
+  //     name: "better-auth.session_token",
+  //     options: {
+  //       httpOnly: true,
+  //       secure: true,
+  //       sameSite: "none",
+  //       path: "/",
+  //       maxAge: 60 * 60 * 24 * 7, // 7 days
+  //     },
+  //   },
+  // },
   trustHost: true,
   logger: {
     level: "debug",
