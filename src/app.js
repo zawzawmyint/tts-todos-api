@@ -8,7 +8,6 @@ import errorHandler from "./middleware/error.middleware.js";
 import multer from "multer";
 // Initialize app
 const app = express();
-const upload = multer();
 
 // Middlewares
 // CORS middleware - allow your frontend dev server
@@ -16,6 +15,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000", // Any other clients
+      "https://tts-todos-nextjs.vercel.app",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

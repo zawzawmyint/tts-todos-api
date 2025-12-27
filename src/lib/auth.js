@@ -10,6 +10,7 @@ export const auth = betterAuth({
   }),
   trustedOrigins: [
     "http://localhost:3000", // If you have other clients
+    "https://tts-todos-nextjs.vercel.app",
   ],
 
   // Add this to ensure CORS is handled properly
