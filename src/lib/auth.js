@@ -9,7 +9,11 @@ export const auth = betterAuth({
   trustedOrigins: [
     "http://localhost:3000",
     "https://tts-todos-nextjs.vercel.app",
-  ],
+    process.env.FRONTEND_URL,
+    ...(process.env.CORS_ORIGINS
+      ? process.env.CORS_ORIGINS.split(",").map((o) => o.trim())
+      : []),
+  ].filter(Boolean),
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,

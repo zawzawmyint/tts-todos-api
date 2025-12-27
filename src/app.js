@@ -10,16 +10,29 @@ import multer from "multer";
 const app = express();
 
 // Middlewares
+// Trust proxy for correct protocol detection behind Render/Vercel
+app.set("trust proxy", 1);
 // CORS middleware - allow your frontend dev server
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://tts-todos-nextjs.vercel.app",
+  process.env.FRONTEND_URL,
+  ...(process.env.CORS_ORIGINS
+    ? process.env.CORS_ORIGINS.split(",").map((o) => o.trim())
+    : []),
+].filter(Boolean);
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000", // Any other clients
-      "https://tts-todos-nextjs.vercel.app",
-    ],
+    origin: allowedOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "x-better-auth",
+      "x-better-auth-csrf",
+    ],
   })
 );
 app.use(express.json());
@@ -53,4 +66,4 @@ app.use((req, res, next) => {
 // Error handler middleware
 app.use(errorHandler);
 
-export default app; // ADD THIS
+export default app;
