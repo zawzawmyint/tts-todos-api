@@ -6,6 +6,7 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+
   trustedOrigins: [
     "http://localhost:3000",
     "https://tts-todos-nextjs.vercel.app",
@@ -14,6 +15,7 @@ export const auth = betterAuth({
       ? process.env.CORS_ORIGINS.split(",").map((o) => o.trim())
       : []),
   ].filter(Boolean),
+
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
@@ -26,33 +28,32 @@ export const auth = betterAuth({
       maxAge: 5 * 60, // 5 minutes
     },
   },
-  // Try this exact structure
-  baseURL: "https://tts-todos-api.onrender.com",
-  basePath: "/api/auth",
-
-  // Cookie settings at root level
-  secureCookies: true,
-  cookiePrefix: "better-auth",
-
   advanced: {
-    cookieOptions: {
-      sameSite: "none",
-      secure: true,
-      httpOnly: true,
+    useSecureCookies: true, // Force secure cookies
+    cookies: {
+      session_token: {
+        name: "better-auth.session_token", // You can customize the name
+        attributes: {
+          sameSite: "none", // THIS IS THE KEY SETTING
+          secure: true,
+          httpOnly: true,
+          path: "/",
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
+      },
+      // Also set for session_data if cookie cache is enabled
+      session_data: {
+        name: "better-auth.session_data",
+        attributes: {
+          sameSite: "none",
+          secure: true,
+          httpOnly: true,
+          path: "/",
+          maxAge: 5 * 60, // 5 minutes (same as cookieCache.maxAge)
+        },
+      },
     },
   },
-  // cookies: {
-  //   sessionToken: {
-  //     name: "better-auth.session_token",
-  //     options: {
-  //       httpOnly: true,
-  //       secure: true,
-  //       sameSite: "none",
-  //       path: "/",
-  //       maxAge: 60 * 60 * 24 * 7, // 7 days
-  //     },
-  //   },
-  // },
   trustHost: true,
   logger: {
     level: "debug",
