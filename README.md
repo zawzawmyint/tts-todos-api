@@ -103,3 +103,17 @@ The server will start on `http://localhost:3001` (or the port specified in your 
 ### Frontend todos repository
 
 [https://github.com/zawzawmyint/tts-todos-nextjs](https://github.com/zawzawmyint/tts-todos-nextjs)
+
+### 🧠 My Thought Process (Backend)
+
+I decided to build a custom API instead of using a mock service because I wanted to demonstrate how a real-world application handles data and security.
+
+- Database Schema (Prisma & PostgreSQL): I designed a relational schema where every Todo is linked to a specific User. This ensures that users can only edit, delete and check done their own data. I included fields for Categories and Priority to give the frontend more data to organize.
+
+- Authentication (Better Auth): I chose Better Auth because it provides a secure, modern way to handle user sessions. It allows the API to identify exactly which user is making a request without manually managing complex JWT logic.
+
+- ORM (Prisma): I used Prisma to interact with my database. It provides "type safety," which means it helps catch errors in the code if I try to save the wrong type of data (like a string where a number should be).
+
+- Scalability (Express.js v5): I used the latest version of Express to build a standard RESTful API. I organized the routes clearly so it is easy to add new features in the future, like "category" or "priority"
+
+- Security & Deployment: I implemented CORS settings to allow my Next.js frontend to communicate safely with this API. I chose Render for hosting because it supports PostgreSQL and handles Environment Variables securely.
