@@ -1,7 +1,6 @@
 import todoService from "../../service/todo/todo.service.js";
 class TodoController {
   async createTodo(req, res, next) {
-    console.log(req);
     try {
       const { title, description, priority, category } = req.body;
 
@@ -31,7 +30,7 @@ class TodoController {
   async getTodos(req, res, next) {
     try {
       const { search, category, priority } = req.query;
-      console.log(search);
+
       const todos = await todoService.getTodos({
         search,
         category,
@@ -51,7 +50,7 @@ class TodoController {
   async getTodoById(req, res, next) {
     try {
       const { id } = req.params;
-      console.log(id);
+
       const todo = await todoService.getTodoById(id);
 
       if (!todo) {
@@ -72,7 +71,6 @@ class TodoController {
   }
 
   async updateTodo(req, res, next) {
-    console.log("request user id", req.user.id);
     try {
       const { id } = req.params;
       const { title, description, completed, priority, category } = req.body;
@@ -97,7 +95,6 @@ class TodoController {
 
       // Check if user is authorized to update this user
       const todo = await todoService.getTodoById(id);
-      console.log("todo user id", todo.userId);
       if (req.user.id !== todo.userId) {
         return res.status(403).json({
           success: false,

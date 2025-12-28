@@ -95,3 +95,11 @@ The server will start on `http://localhost:3001` (or the port specified in your 
 - **Auth**: `/api/auth/*` (Handled by Better Auth)
 - **Users**: `/api/users`
 - **Todos**: `/api/todos`
+
+### Host on Render
+
+[https://tts-todos-api.onrender.com](https://tts-todos-api.onrender.com/)
+
+### Frontend todos repository
+
+[https://github.com/zawzawmyint/tts-todos-nextjs](https://github.com/zawzawmyint/tts-todos-nextjs)

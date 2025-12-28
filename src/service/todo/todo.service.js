@@ -17,8 +17,6 @@ class TodoService {
 
   async getTodos(filters = {}) {
     const { search, category, priority } = filters;
-
-    console.log("Todos filters", filters);
     const whereClause = {};
 
     // filtered by cateogry
@@ -73,8 +71,6 @@ class TodoService {
 
   async updateTodo(id, todo) {
     const { title, description, completed, priority, category } = todo;
-
-    console.log("Todo", todo);
 
     const updateData = {};
 
